@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        .popup {
+            z-index: 9999;
+            animation: mymove 1s infinite;
+        }
+
+        @keyframes mymove {
+            from {
+                background-color: red;
+            }
+
+            to {
+                background-color: blue;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col md:flex-row min-h-screen">
+
+
+    <!-- Alert -->
+    <div id="popup"
+        class="fixed text-center flex items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 rounded-lg shadow-lg border border-gray-300 hidden">
+
+        <img src="https://media.tenor.com/cRvCx2iZvG0AAAAi/clash-royale-emote.gif" alt=" " width="500" height="600">
+        <p class="text-4xl font-semibold font-mono">Jangan Ada Revisi</p>
+        <p class="text-9xl font-bold font-sans">TOD!</p>
+        <img src="https://media.tenor.com/cRvCx2iZvG0AAAAi/clash-royale-emote.gif" alt=" " width="500" height="600">
+
+    </div>
+
+
+    <nav class="bg-white text-black p-4 md:w-1/4 md:min-h-screen flex md:flex-col justify-between">
+        <h1 class="text-2xl font-bold">SIKMA</h1>
+        <div class="flex justify-between items-center md:block">
+
+            <button id="menu-toggle" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+
+        </div>
+        <div id="menu" class="hidden bg-white text-black md:block md:flex md:flex-col md:flex-grow">
+            <a href="{% url 'index' %}" class="block text-blue-500 pt-4 hover:text-blue-500 md:mt-0 md:ml-4">Home</a>
+            <a href="{% url 'transaksi' %}" class="block pt-4 hover:text-blue-500 md:mt-0 md:ml-4">Tambah Transaksi</a>
+            <a href="{% url 'jurnal' %}" class="block pt-4 hover:text-blue-500 md:mt-0 md:ml-4">Jurnal Umum</a>
+            <a href="{% url 'buku' %}" class="block pt-4 hover:text-blue-500 md:mt-0 md:ml-4">Buku Kas</a>
+            <a href="{% url 'billing' %}" class="block pt-4 hover:text-blue-500 md:mt-0 md:ml-4">E-Billing</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto p-6 bg-gray-100">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl mb-2">Profil</h2>
+                <p>Informasi</p>
+                <img
+                    src="https://substackcdn.com/image/fetch/w_1250,h_703,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9159ec3-b9ea-4d90-8619-2087231aea33_825x487.gif">
+            </div>
+
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl mb-2">Pemasukkan dan Pengeluaran</h2>
+                <li><a href="{% url 'transaksi' %}" class="text-blue-500">Tambah Transaksi</a></li>
+                <li><a href="{% url 'jurnal' %}" class="text-blue-500">Jurnal Umum</a></li>
+                <li><a href="{% url 'buku' %}" class="text-blue-500">Buku Kas</a></li>
+                <li><a href="{% url 'billing' %}" class="text-blue-500">E-Billing dan Bayar Pajak</a></li>
+            </ul>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        var menu = document.getElementById('menu');
+        menu.classList.toggle('hidden');
+    });
+</script>
+
+
+<!-- Tampilkan popup -->
+<script>
+    window.onload = function () {
+
+        document.getElementById('popup').classList.remove('hidden');
+
+        setTimeout(function () {
+            document.getElementById('popup').classList.add('hidden');
+        }, 5000);
+    };
+</script>
+<script>
+
+    // Get the div element by its ID 
+    const popup =
+        document.getElementById('popup');
+
+    // An array of colors to be used for blinking 
+    const colors = ['blue', 'white', '#FDA403'];
+
+    // Variable to keep track of the 
+    // current color index 
+    let currentColorIndex = 0;
+
+    // Function to toggle the background 
+    // color of the div 
+    function blinkBackground() {
+        popup.style.backgroundColor =
+            colors[currentColorIndex];
+        currentColorIndex =
+            (currentColorIndex + 1) % colors.length;
+    }
+
+    // Start the blinking by setting an interval  
+    // that calls the blinkBackground  
+    // function every 1000ms (1 second) 
+    const blinkingInterval =
+        setInterval(blinkBackground, 100);
+
+    // To stop blinking after 5 seconds,  
+    // use setTimeout to clear the interval 
+    setTimeout(() => {
+        clearInterval(blinkingInterval);
+    }, 5000); 
+</script>
+
+</html>
